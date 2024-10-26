@@ -15,6 +15,8 @@ const bookSchema = new mongoose.Schema({
     },
     ISBN:{
         type: String,
+        required: true
+
     },
     language:{
         type: String,
