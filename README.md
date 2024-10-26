@@ -18,8 +18,10 @@ Install dependencies
 npm i
 ~~~
 ### mongodb server
-  Install mongodb~~~
-  create connection~~~
+  Install mongodb
+  ##
+  create connection
+  ##
   create db  
 
 
