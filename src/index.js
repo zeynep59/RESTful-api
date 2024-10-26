@@ -1,6 +1,9 @@
-import app from "./app.js";
-import config from "../config.js";
+const app = require('./app.js')
+const config = require('../config.js')
 
-app.listen(5000, () =>{
-    console.log(config.app_name+" Started on Port 5000")
-})
+const PORT = 3000;
+
+// Start the server
+app.listen(PORT, () => {
+    console.log(`${config.app_name} started on port ${PORT}`);
+});
