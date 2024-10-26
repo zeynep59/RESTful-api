@@ -1,23 +1,21 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const app = express();
+const express = require('express')
+const mongoose = require('mongoose')
+const authorsRoutes = require('./src/routes/authorsRoute')
+const booksRoutes = require('./src/routes/booksRoute')
+const app = express()
 
-module.exports = () => {
-    mongoose.connect("mongodb://127.0.0.1:27017/bookStore", { useMongoClient: true });
+app.use(express.json())
 
-    mongoose.connection.on('open', () => {
-        console.log('MongoDB: Connected');
-      });
-      mongoose.connection.on('error', (err) => {
-        console.log('MongoDB: Error', err);
-      });
+mongoose.connect('mongodb://127.0.0.1:27017/bookStore')
 
-    mongoose.Promise = global.Promise;
-}
+mongoose.connection.on('connected', () => {
+    console.log('Mongoose connected')
+    app.listen(5000, () => console.log('Server started on port 5000'))
+})
 
-app.get('/', (request, response) => {
-    response.send('Hello World!')
-});
+mongoose.connection.on('error', (error) => {
+    console.log('Mongoose connection error: ', error)
+})
 
-
-app.listen(5000, ()=> console.log('server is running on port 5000'))
+app.use('/books', booksRoutes )
+app.use('/authors', authorsRoutes)
